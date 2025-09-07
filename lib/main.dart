@@ -1,4 +1,4 @@
-import 'package:currency_converter/data/repos/currency/currency_repo.dart';
+import 'package:currency_converter/presentation/screens/currencies_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'di/di.dart';
@@ -20,24 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        cardColor: Colors.deepPurple.shade50,
       ),
-      home: const Homepage(),
-    );
-  }
-}
-
-class Homepage extends StatelessWidget {
-  const Homepage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: FutureBuilder(
-          future: di<CurrencyRepo>().getCurrencies(),
-          builder: (_, snapshot) => Text(snapshot.data.toString()),
-        ),
-      ),
+      home: const CurrenciesScreen(),
     );
   }
 }
