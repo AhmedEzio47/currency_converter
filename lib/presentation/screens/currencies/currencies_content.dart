@@ -1,4 +1,4 @@
-import 'package:currency_converter/presentation/currencies/bloc/currencies_bloc.dart';
+import 'package:currency_converter/presentation/screens/currencies/bloc/currencies_bloc.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
 import 'package:currency_converter/presentation/widgets/custom_cached_image.dart';
 import 'package:flutter/material.dart';
