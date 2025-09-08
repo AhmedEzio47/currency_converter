@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:currency_converter/core/custom_types/json.dart';
-import 'package:currency_converter/presentation/screens/currencies/currencies_screen.dart';
+import 'package:currency_converter/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -31,8 +31,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         cardColor: Colors.deepPurple.shade50,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.deepPurple,
+          iconTheme: IconThemeData(color: Colors.white),
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+          ),
+        ),
       ),
-      home: const CurrenciesScreen(),
+      home: const HomeScreen(),
     );
   }
 }

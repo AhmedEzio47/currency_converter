@@ -9,6 +9,7 @@ class CurrenciesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Currencies')),
       body: Center(
         child: BaseBlocConsumer<CurrenciesBloc, CurrenciesState>(
           onSuccess: (_, state) => ListView.separated(
