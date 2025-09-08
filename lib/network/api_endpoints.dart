@@ -6,7 +6,8 @@ enum APIEndpoints {
       path: '/api/currencies.json',
       cacheValidityDuration: Duration(days: 1),
     ),
-  );
+  ),
+  exchangeRates(APIEndpoint(path: '/api/historical/{date}.json'));
 
   const APIEndpoints(this.endpoint);
 
