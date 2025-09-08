@@ -18,6 +18,8 @@ class CurrencyRepoImpl implements CurrencyRepo {
         RouteConfig(
           path: APIEndpoints.currencies.endpoint.path,
           requestType: RequestType.get,
+          shouldCacheResponse: true,
+          maxCacheAge: APIEndpoints.currencies.endpoint.cacheValidityDuration,
         ),
       );
       return Right(CurrenciesModel.fromJson(result));
