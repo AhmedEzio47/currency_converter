@@ -10,7 +10,7 @@ class CurrenciesModel {
   factory CurrenciesModel.fromJson(JSON json) {
     var currencies = <CurrencyModel>[];
     for (final key in json.keys) {
-      currencies.add(CurrencyModel(key: key, name: json[key]));
+      currencies.add(CurrencyModel(currencyCode: key, name: json[key]));
     }
     return CurrenciesModel(currencies);
   }

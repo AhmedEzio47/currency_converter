@@ -1,6 +1,6 @@
-import 'package:currency_converter/presentation/common/color_extension.dart';
 import 'package:currency_converter/presentation/currencies/bloc/currencies_bloc.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
+import 'package:currency_converter/presentation/widgets/custom_cached_image.dart';
 import 'package:flutter/material.dart';
 
 class CurrenciesContent extends StatelessWidget {
@@ -16,18 +16,20 @@ class CurrenciesContent extends StatelessWidget {
             itemBuilder: (_, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: ListTile(
-                contentPadding: EdgeInsets.zero,
+                contentPadding: EdgeInsets.symmetric(horizontal: 8),
                 leadingAndTrailingTextStyle: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
-                leading: Container(
-                  decoration: BoxDecoration(
-                    color: ColorExtension.random(),
-                    shape: BoxShape.circle,
-                  ),
-                  padding: EdgeInsets.all(12),
-                  child: Text(state.currencies?.currencies[index].key ?? ''),
+                leading: FutureBuilder(
+                  future: state.currencies?.currencies[index].flag,
+                  builder: (context, snap) {
+                    return CustomCachedImage(
+                      imageUrl: snap.data ?? '',
+                      hidePlaceholderBackground: true,
+                      width: 25,
+                    );
+                  },
                 ),
                 tileColor: Theme.of(context).cardColor,
                 title: Text(state.currencies?.currencies[index].name ?? ''),
