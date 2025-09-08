@@ -1,6 +1,5 @@
-import 'package:currency_converter/core/extensions/date_formatter.dart';
-import 'package:currency_converter/core/extensions/num_formatter.dart';
 import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
+import 'package:currency_converter/presentation/screens/exchange_rates/widgets/exchange_rates_chart.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 
@@ -30,15 +29,9 @@ class ExchangeRatesContent extends StatelessWidget {
                   ),
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: state.rates?.length ?? 0,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      '${state.rates?[index].dateTime?.formattedYMD}: ${state.rates?[index].rate?.toMaxTwoDecimals()}',
-                    ),
-                  ),
-                ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ExchangeRatesChart(exchangeRates: state.rates ?? []),
               ),
             ],
           ),
