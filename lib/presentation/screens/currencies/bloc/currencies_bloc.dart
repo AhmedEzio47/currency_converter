@@ -9,14 +9,13 @@ part 'currencies_event.dart';
 part 'currencies_state.dart';
 
 class CurrenciesBloc extends Bloc<CurrenciesEvent, CurrenciesState> {
-  CurrenciesBloc(this.getCurrenciesUseCase)
-    : super(const CurrenciesState(status: Status.initial)) {
+  CurrenciesBloc(this.getCurrenciesUseCase) : super(const CurrenciesState()) {
     on<CurrenciesFetched>(_onCurrenciesFetched);
   }
 
   final GetCurrenciesUseCase getCurrenciesUseCase;
 
-  void _onCurrenciesFetched(
+  Future<void> _onCurrenciesFetched(
     CurrenciesFetched event,
     Emitter<CurrenciesState> emit,
   ) async {
