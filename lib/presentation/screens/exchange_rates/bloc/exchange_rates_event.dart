@@ -7,3 +7,13 @@ sealed class ExchangeRatesEvent {
 final class ExchangeRatesForLastWeekFetched extends ExchangeRatesEvent {
   const ExchangeRatesForLastWeekFetched();
 }
+
+final class ExchangeRatesForTodayFetched extends ExchangeRatesEvent {
+  const ExchangeRatesForTodayFetched({
+    required this.baseCurrency,
+    required this.targetCurrency,
+  });
+
+  final String baseCurrency;
+  final String targetCurrency;
+}

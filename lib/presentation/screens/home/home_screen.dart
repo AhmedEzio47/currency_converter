@@ -1,3 +1,4 @@
+import 'package:currency_converter/presentation/screens/coverter/converter_screen.dart';
 import 'package:currency_converter/presentation/screens/currencies/currencies_screen.dart';
 import 'package:currency_converter/presentation/screens/exchange_rates/exchange_rates_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,15 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               child: const Text("Exchange Rates"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ConverterScreen()),
+                );
+              },
+              child: const Text("Converter"),
             ),
           ],
         ),

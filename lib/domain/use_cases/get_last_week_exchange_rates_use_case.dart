@@ -3,14 +3,15 @@ import 'package:currency_converter/core/custom_types/result.dart';
 import 'package:currency_converter/core/extensions/date_formatter.dart';
 import 'package:currency_converter/data/repos/currency/currency_repo.dart';
 import 'package:currency_converter/domain/entities/exchange_rate_entity.dart';
+import 'package:currency_converter/domain/use_cases/parameters/exchange_rates_params.dart';
 import 'package:currency_converter/domain/use_cases/use_case.dart';
 import 'package:dartz/dartz.dart';
 
 /// This use case gets exchange rates in the past 7 days
 ///
-class GetExchangeRatesUseCase
+class GetLastWeekExchangeRatesUseCase
     implements UseCase<List<ExchangeRateEntity>, ExchangeRatesParams> {
-  const GetExchangeRatesUseCase(this.repo);
+  const GetLastWeekExchangeRatesUseCase(this.repo);
 
   final CurrencyRepo repo;
 
@@ -33,14 +34,4 @@ class GetExchangeRatesUseCase
     }
     return Right(rates);
   }
-}
-
-class ExchangeRatesParams {
-  const ExchangeRatesParams({
-    required this.baseCurrency,
-    required this.targetCurrency,
-  });
-
-  final String baseCurrency;
-  final String targetCurrency;
 }
