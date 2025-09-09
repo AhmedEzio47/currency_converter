@@ -1,4 +1,4 @@
-import 'package:currency_converter/core/extensions/date_formatter.dart';
+import 'package:currency_converter/core/extensions/date_formatting.dart';
 import 'package:currency_converter/domain/entities/exchange_rate_entity.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';

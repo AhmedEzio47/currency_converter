@@ -1,6 +1,7 @@
 import 'package:currency_converter/core/custom_types/app_exception.dart';
 import 'package:currency_converter/core/custom_types/result.dart';
-import 'package:currency_converter/core/extensions/date_formatter.dart';
+import 'package:currency_converter/core/extensions/date_formatting.dart';
+import 'package:currency_converter/core/extensions/either_casting.dart';
 import 'package:currency_converter/data/repos/currency/currency_repo.dart';
 import 'package:currency_converter/domain/entities/exchange_rate_entity.dart';
 import 'package:currency_converter/domain/use_cases/parameters/exchange_rates_params.dart';
@@ -24,13 +25,11 @@ class GetLastWeekExchangeRatesUseCase
         base: params.baseCurrency,
         date: date,
       );
-      result.fold((l) => Left(AppUnexpectedException()), (r) {
-        if (r.rates == null) return Left(AppUnexpectedException());
-        final rate = r.rates!.firstWhere(
-          (element) => element.targetCurrency == params.targetCurrency,
-        );
-        rates.add(ExchangeRateEntity.fromModel(rate));
-      });
+      if (result.isLeft()) return Left(AppUnexpectedException());
+      final rate = result.asRight().rates!.firstWhere(
+        (element) => element.targetCurrency == params.targetCurrency,
+      );
+      rates.add(ExchangeRateEntity.fromModel(rate));
     }
     return Right(rates);
   }

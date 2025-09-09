@@ -1,4 +1,4 @@
-import 'package:currency_converter/core/extensions/num_formatter.dart';
+import 'package:currency_converter/core/extensions/num_formatting.dart';
 import 'package:currency_converter/di/di.dart';
 import 'package:currency_converter/presentation/common/status.dart';
 import 'package:currency_converter/presentation/screens/currencies/bloc/currencies_bloc.dart';
