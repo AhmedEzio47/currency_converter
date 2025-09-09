@@ -8,4 +8,7 @@ final class CurrenciesState extends BaseState {
   });
 
   final CurrenciesModel? currencies;
+
+  @override
+  List<Object?> get props => super.props..addAll([currencies]);
 }
