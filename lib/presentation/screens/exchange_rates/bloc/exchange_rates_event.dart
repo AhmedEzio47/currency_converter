@@ -9,11 +9,7 @@ final class ExchangeRatesForLastWeekFetched extends ExchangeRatesEvent {
 }
 
 final class ExchangeRatesForTodayFetched extends ExchangeRatesEvent {
-  const ExchangeRatesForTodayFetched({
-    required this.baseCurrency,
-    required this.targetCurrency,
-  });
+  const ExchangeRatesForTodayFetched({required this.baseCurrency});
 
   final String baseCurrency;
-  final String targetCurrency;
 }

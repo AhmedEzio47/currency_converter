@@ -19,7 +19,11 @@ class ConverterScreen extends StatelessWidget {
         BlocProvider(
           create: (_) => di<CurrenciesBloc>()..add(CurrenciesFetched()),
         ),
-        BlocProvider(create: (_) => di<ExchangeRatesBloc>()),
+        BlocProvider(
+          create: (_) =>
+              di<ExchangeRatesBloc>()
+                ..add(ExchangeRatesForTodayFetched(baseCurrency: 'USD')),
+        ),
         BlocProvider(create: (_) => di<ConverterBloc>()),
       ],
       child: const ConverterContent(),
@@ -88,7 +92,6 @@ class _ConverterContentState extends State<ConverterContent> {
                           .toList(),
                       onChanged: (val) {
                         setState(() => _toCurrency = val);
-                        _onCurrencyChanged();
                         _amountController.clear();
                         context.read<ConverterBloc>().add(
                           const ConversionReset(),
@@ -129,7 +132,7 @@ class _ConverterContentState extends State<ConverterContent> {
                             from: _fromCurrency,
                             to: _toCurrency!,
                             amount: amount,
-                            rate: state.todayExchangeRate?.rate ?? 0,
+                            rate: state.todayRate(_toCurrency!) ?? 0,
                           ),
                         );
                       }
@@ -144,14 +147,14 @@ class _ConverterContentState extends State<ConverterContent> {
 
             const SizedBox(height: 24),
 
-            // Show today’s exchange rate
-            BaseBlocConsumer<ExchangeRatesBloc, ExchangeRatesState>(
-              onSuccess: (context, state) {
-                return Text(
-                  'Today’s rate: 1 ${state.baseCurrency} = ${state.todayExchangeRate?.rate?.toMaxTwoDecimals()} ${state.targetCurrency}',
-                );
-              },
-            ),
+            if (_toCurrency != null)
+              BaseBlocConsumer<ExchangeRatesBloc, ExchangeRatesState>(
+                onSuccess: (context, state) {
+                  return Text(
+                    'Today’s rate: 1 ${state.baseCurrency} = ${state.todayRate(_toCurrency!)?.toMaxTwoDecimals()} $_toCurrency',
+                  );
+                },
+              ),
 
             const SizedBox(height: 16),
 
@@ -168,17 +171,5 @@ class _ConverterContentState extends State<ConverterContent> {
         ),
       ),
     );
-  }
-
-  void _onCurrencyChanged() {
-    if (_toCurrency != null &&
-        _toCurrency != context.read<ExchangeRatesBloc>().state.targetCurrency) {
-      context.read<ExchangeRatesBloc>().add(
-        ExchangeRatesForTodayFetched(
-          baseCurrency: _fromCurrency,
-          targetCurrency: _toCurrency!,
-        ),
-      );
-    }
   }
 }

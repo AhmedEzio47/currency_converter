@@ -11,7 +11,11 @@ final class ExchangeRatesState extends BaseState {
   });
 
   final List<ExchangeRateEntity>? rates;
-  final ExchangeRateEntity? todayExchangeRate;
+  final ExchangeRatesModel? todayExchangeRate;
   final String? baseCurrency;
   final String? targetCurrency;
+
+  num? todayRate(String targetCurrency) => todayExchangeRate?.rates
+      ?.firstWhere((e) => e.targetCurrency == targetCurrency)
+      .rate;
 }

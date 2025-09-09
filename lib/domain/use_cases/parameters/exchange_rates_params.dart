@@ -1,9 +1,6 @@
 class ExchangeRatesParams {
-  const ExchangeRatesParams({
-    required this.baseCurrency,
-    required this.targetCurrency,
-  });
+  const ExchangeRatesParams({required this.baseCurrency, this.targetCurrency});
 
   final String baseCurrency;
-  final String targetCurrency;
+  final String? targetCurrency;
 }

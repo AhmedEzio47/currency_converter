@@ -1,3 +1,4 @@
+import 'package:currency_converter/data/models/exchange_rates_model.dart';
 import 'package:currency_converter/domain/entities/exchange_rate_entity.dart';
 import 'package:currency_converter/domain/use_cases/get_last_week_exchange_rates_use_case.dart';
 import 'package:currency_converter/domain/use_cases/get_today_exchange_rate_use_case.dart';
@@ -49,10 +50,7 @@ final class ExchangeRatesBloc
   ) async {
     emit(const ExchangeRatesState(status: Status.loading));
     final result = await getTodayExchangeRateUseCase(
-      ExchangeRatesParams(
-        baseCurrency: event.baseCurrency,
-        targetCurrency: event.targetCurrency,
-      ),
+      ExchangeRatesParams(baseCurrency: event.baseCurrency),
     );
     result.fold(
       (l) => emit(ExchangeRatesState(status: Status.failure, failure: l)),
@@ -61,7 +59,6 @@ final class ExchangeRatesBloc
           status: Status.success,
           todayExchangeRate: r,
           baseCurrency: event.baseCurrency,
-          targetCurrency: event.targetCurrency,
         ),
       ),
     );
