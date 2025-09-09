@@ -1,8 +1,9 @@
 import 'package:currency_converter/core/custom_types/json.dart';
+import 'package:equatable/equatable.dart';
 
 import 'exchange_rate_model.dart';
 
-class ExchangeRatesModel {
+class ExchangeRatesModel extends Equatable {
   const ExchangeRatesModel({this.rates, this.baseCurrency});
 
   final List<ExchangeRateModel>? rates;
@@ -22,4 +23,7 @@ class ExchangeRatesModel {
     }
     return ExchangeRatesModel(rates: rates, baseCurrency: json['base']);
   }
+
+  @override
+  List<Object?> get props => [baseCurrency, rates];
 }

@@ -1,8 +1,9 @@
 import 'package:currency_converter/data/models/currency_model.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../core/custom_types/json.dart';
 
-class CurrenciesModel {
+class CurrenciesModel extends Equatable {
   const CurrenciesModel(this.currencies);
 
   final List<CurrencyModel> currencies;
@@ -14,4 +15,7 @@ class CurrenciesModel {
     }
     return CurrenciesModel(currencies);
   }
+
+  @override
+  List<Object?> get props => [currencies];
 }

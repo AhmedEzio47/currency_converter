@@ -24,6 +24,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   cached_network_image: ^3.4.1
   fl_chart: ^1.1.0
+  mocktail: ^1.0.4
 
 dev_dependencies:
   flutter_test:

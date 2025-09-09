@@ -1,6 +1,7 @@
 import 'package:currency_converter/main.dart';
+import 'package:equatable/equatable.dart';
 
-class CurrencyModel {
+class CurrencyModel extends Equatable {
   const CurrencyModel({this.currencyCode, this.name});
 
   final String? currencyCode;
@@ -17,4 +18,7 @@ class CurrencyModel {
       'Country code not found or invalid for currency: $currencyCode',
     );
   }
+
+  @override
+  List<Object?> get props => [currencyCode];
 }
