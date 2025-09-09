@@ -3,6 +3,7 @@ import 'package:currency_converter/di/di.dart';
 import 'package:currency_converter/presentation/common/status.dart';
 import 'package:currency_converter/presentation/screens/currencies/bloc/currencies_bloc.dart';
 import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
+import 'package:currency_converter/presentation/widgets/app_snack_bar.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -160,6 +161,17 @@ class _ConverterContentState extends State<ConverterContent> {
 
             // Show conversion result
             BaseBlocConsumer<ConverterBloc, ConverterState>(
+              listener: (context, state) {
+                if (state.status == Status.failure) {
+                  AppSnackBar.show(
+                    snackBarType: SnackBarTypes.error,
+                    context: context,
+                    message:
+                        state.failure?.getLocalizedMessage(context) ??
+                        'Conversion error',
+                  );
+                }
+              },
               onSuccess: (context, state) {
                 return Text(
                   '${state.amount} ${state.from} = ${state.converted?.toMaxTwoDecimals()} ${state.to}',

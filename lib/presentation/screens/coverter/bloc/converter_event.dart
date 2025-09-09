@@ -10,7 +10,7 @@ final class ConversionSubmitted extends ConverterEvent {
     required this.to,
     required this.amount,
     required this.rate,
-  }) : assert(amount > 0, 'Amount must be greater than zero');
+  });
 
   final String from;
   final String to;

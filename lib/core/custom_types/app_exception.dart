@@ -51,6 +51,18 @@ class AppUnexpectedException extends AppException {
   String getLocalizedMessage(BuildContext context) => 'unknownException';
 }
 
+class AppInvalidInputException extends AppException {
+  const AppInvalidInputException(this.message);
+
+  final String message;
+
+  @override
+  String get errorKey => 'invalidInput';
+
+  @override
+  String getLocalizedMessage(BuildContext context) => message;
+}
+
 /// When there is issue connecting to the server and server returned a message.
 sealed class AppServerException extends AppException {
   const AppServerException({this.message, this.errorCode, this.statusCode});

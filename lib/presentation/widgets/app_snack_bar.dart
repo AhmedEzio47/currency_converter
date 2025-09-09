@@ -35,7 +35,9 @@ class AppSnackBar {
             child: Icon(snackBarTypes.icon, color: snackBarTypes.snackBarColor),
           ),
           SizedBox(width: 15),
-          Expanded(child: Text(message)),
+          Expanded(
+            child: Text(message, style: Theme.of(context).textTheme.bodyMedium),
+          ),
         ],
       ),
     );
