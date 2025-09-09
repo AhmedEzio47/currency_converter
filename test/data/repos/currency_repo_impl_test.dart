@@ -44,30 +44,33 @@ void main() {
       verifyNoMoreInteractions(network);
     });
 
-    test('should return ServerFailure when call is unsuccessful', () async {
-      /// arrange
-      when(
-        () => network.request(any()),
-      ).thenThrow(const DefaultAppServerException());
+    test(
+      'should return AppServerException when call is unsuccessful',
+      () async {
+        /// arrange
+        when(
+          () => network.request(any()),
+        ).thenThrow(const DefaultAppServerException());
 
-      /// act
-      final result = await sut.getCurrencies();
+        /// act
+        final result = await sut.getCurrencies();
 
-      /// assert
-      verify(() => network.request(any())).called(1);
-      expect(result, isA<Left<AppException, CurrenciesModel>>());
-      verifyNoMoreInteractions(network);
-    });
+        /// assert
+        verify(() => network.request(any())).called(1);
+        expect(result, isA<Left<AppException, CurrenciesModel>>());
+        verifyNoMoreInteractions(network);
+      },
+    );
   });
 
-  group('getExchangeRate', () {
+  group('getExchangeRates', () {
     const base = 'USD';
     const exchangeRate = ExchangeRatesModel(
       baseCurrency: 'USD',
       rates: [ExchangeRateModel(targetCurrency: 'EUR', rate: 0.85)],
     );
 
-    test('should return exchange rate when successful', () async {
+    test('should return exchange rates when successful', () async {
       /// arrange
       when(() => network.request(any())).thenAnswer(
         (_) async => <String, dynamic>{
@@ -85,19 +88,25 @@ void main() {
       verifyNoMoreInteractions(network);
     });
 
-    test('should return ServerFailure when call is unsuccessful', () async {
-      /// arrange
-      when(
-        () => network.request(any()),
-      ).thenThrow(const DefaultAppServerException());
+    test(
+      'should return AppServerException when call is unsuccessful',
+      () async {
+        /// arrange
+        when(
+          () => network.request(any()),
+        ).thenThrow(const DefaultAppServerException());
 
-      /// act
-      final result = await sut.getExchangeRates(base: base, date: '2025-09-09');
+        /// act
+        final result = await sut.getExchangeRates(
+          base: base,
+          date: '2025-09-09',
+        );
 
-      /// assert
-      verify(() => network.request(any())).called(1);
-      expect(result, isA<Left<AppException, ExchangeRatesModel>>());
-      verifyNoMoreInteractions(network);
-    });
+        /// assert
+        verify(() => network.request(any())).called(1);
+        expect(result, isA<Left<AppException, ExchangeRatesModel>>());
+        verifyNoMoreInteractions(network);
+      },
+    );
   });
 }
