@@ -17,7 +17,7 @@ class GetTodayExchangeRateUseCase
   Result<ExchangeRatesModel> call(ExchangeRatesParams params) async {
     final result = await repo.getExchangeRates(
       base: params.baseCurrency,
-      date: DateTime.now().formattedYMD,
+      date: DateTime.now().subtract(Duration(hours: 6)).formattedYMD,
     );
     return result.fold((l) => Left(AppUnexpectedException()), (r) {
       return Right(r);

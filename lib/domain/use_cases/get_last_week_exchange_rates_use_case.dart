@@ -19,7 +19,7 @@ class GetLastWeekExchangeRatesUseCase
   @override
   Result<List<ExchangeRateEntity>> call(ExchangeRatesParams params) async {
     var rates = <ExchangeRateEntity>[];
-    for (var i = 0; i < 7; i++) {
+    for (var i = 1; i <= 7; i++) {
       final date = DateTime.now().subtract(Duration(days: i)).formattedYMD;
       final result = await repo.getExchangeRates(
         base: params.baseCurrency,
