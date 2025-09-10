@@ -33,7 +33,7 @@ void main() {
           from: from,
           to: to,
           amount: amount,
-          converted: converted,
+          result: converted,
           status: Status.success,
         ),
       ],

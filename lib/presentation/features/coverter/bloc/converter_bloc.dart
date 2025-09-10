@@ -29,7 +29,7 @@ final class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
         from: event.from,
         to: event.to,
         amount: event.amount,
-        converted: event.amount * event.rate,
+        result: event.amount * event.rate,
         status: Status.success,
       ),
     );

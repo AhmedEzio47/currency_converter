@@ -1,4 +1,5 @@
 import 'package:currency_converter/di/di.dart';
+import 'package:currency_converter/presentation/features/coverter/bloc/converter_bloc.dart';
 import 'package:currency_converter/presentation/features/currencies/bloc/currencies_bloc.dart';
 import 'package:currency_converter/presentation/features/exchange_rates/bloc/exchange_rates_bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
               di<ExchangeRatesBloc>()
                 ..add(ExchangeRatesForTodayFetched(baseCurrency: 'USD')),
         ),
+        BlocProvider(create: (_) => di<ConverterBloc>()),
       ],
       child: HomeContent(),
     );

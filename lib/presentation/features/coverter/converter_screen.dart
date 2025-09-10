@@ -77,7 +77,7 @@ class _ConverterContentState extends State<ConverterContent> {
               },
               onSuccess: (context, state) {
                 return Text(
-                  '${state.amount} ${state.from} = ${state.converted?.toMaxTwoDecimals()} ${state.to}',
+                  '${state.amount} ${state.from} = ${state.result?.toMaxTwoDecimals()} ${state.to}',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 );
               },
