@@ -23,6 +23,20 @@ class ConversionForm extends HookWidget {
   Widget build(BuildContext context) {
     final toCurrency = useState<String?>(null);
     final TextEditingController amountController = useTextEditingController();
+    final amountText = useState('');
+
+    useEffect(() {
+      void listener() {
+        amountText.value = amountController.text;
+      }
+
+      amountController.addListener(listener);
+
+      // Clean up when the widget is disposed or rebuilt
+      return () {
+        amountController.removeListener(listener);
+      };
+    }, [amountController]);
 
     return BlocListener<ConverterBloc, ConverterState>(
       listener: (_, state) async {
@@ -44,6 +58,7 @@ class ConversionForm extends HookWidget {
           context.read<ConverterBloc>().add(ConversionReset());
           amountController.clear();
           toCurrency.value = null;
+          amountText.value = '';
         } else if (state.status == Status.failure) {
           AppSnackBar.show(
             snackBarType: SnackBarTypes.error,
@@ -119,7 +134,7 @@ class ConversionForm extends HookWidget {
               return ElevatedButton(
                 onPressed:
                     toCurrency.value == null ||
-                        amountController.text.isEmpty ||
+                        amountText.value.isEmpty ||
                         state.todayRate(toCurrency.value!) == null
                     ? null
                     : () {
