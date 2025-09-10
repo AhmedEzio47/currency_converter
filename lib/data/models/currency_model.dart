@@ -7,16 +7,12 @@ class CurrencyModel extends Equatable {
   final String? currencyCode;
   final String? name;
 
-  Future<String> get flag async {
+  String get flag {
     final List<dynamic>? codes = countryCodesMap[currencyCode];
     if (codes != null && codes.isNotEmpty) {
-      return 'https://flagcdn.com/20x15/${codes.first.toString().toLowerCase()}.png';
+      return 'https://flagcdn.com/w80/${codes.first.toString().toLowerCase()}.png';
     }
-    // Return a default/placeholder flag or throw an error if currencyCode is not found
-    // or if codes list is empty. For now, let's throw an error.
-    throw Exception(
-      'Country code not found or invalid for currency: $currencyCode',
-    );
+    return 'https://flagcdn.com/w80/un.png'; // Unknown flag
   }
 
   @override
