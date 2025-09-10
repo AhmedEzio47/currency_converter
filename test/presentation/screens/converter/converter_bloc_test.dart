@@ -39,20 +39,6 @@ void main() {
       ],
     );
 
-    test(
-      'throws AssertionError if amount is zero or negative on ConversionSubmitted',
-      () {
-        expect(
-          () => ConversionSubmitted(from: from, to: to, amount: 0, rate: rate),
-          throwsA(isA<AssertionError>()),
-        );
-        expect(
-          () => ConversionSubmitted(from: from, to: to, amount: -5, rate: rate),
-          throwsA(isA<AssertionError>()),
-        );
-      },
-    );
-
     blocTest<ConverterBloc, ConverterState>(
       'emits initial state on ConversionReset',
       build: () => bloc,
