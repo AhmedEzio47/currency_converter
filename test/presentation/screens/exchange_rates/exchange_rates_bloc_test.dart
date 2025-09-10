@@ -63,7 +63,8 @@ void main() {
       ).thenAnswer((_) async => Right(lastWeekRates));
       return bloc;
     },
-    act: (bloc) => bloc.add(const ExchangeRatesForLastWeekFetched()),
+    act: (bloc) =>
+        bloc.add(const ExchangeRatesForLastWeekFetched(targetCurrency: 'EGP')),
     expect: () => [
       const ExchangeRatesState(status: Status.loading),
       ExchangeRatesState(
@@ -86,7 +87,8 @@ void main() {
       ).thenAnswer((_) async => Left(failure));
       return bloc;
     },
-    act: (bloc) => bloc.add(const ExchangeRatesForLastWeekFetched()),
+    act: (bloc) =>
+        bloc.add(const ExchangeRatesForLastWeekFetched(targetCurrency: 'EGP')),
     expect: () => [
       const ExchangeRatesState(status: Status.loading),
       ExchangeRatesState(status: Status.failure, failure: failure),

@@ -29,7 +29,10 @@ final class ExchangeRatesBloc
   ) async {
     emit(const ExchangeRatesState(status: Status.loading));
     final result = await getExchangeRatesUseCase(
-      const ExchangeRatesParams(baseCurrency: 'USD', targetCurrency: 'EGP'),
+      ExchangeRatesParams(
+        baseCurrency: 'USD',
+        targetCurrency: event.targetCurrency,
+      ),
     );
     result.fold(
       (l) => emit(ExchangeRatesState(status: Status.failure, failure: l)),
