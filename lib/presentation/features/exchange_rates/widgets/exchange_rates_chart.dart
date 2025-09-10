@@ -43,7 +43,6 @@ class ExchangeRatesChart extends StatelessWidget {
             ),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
-                minIncluded: false,
                 reservedSize: 100,
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
