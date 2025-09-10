@@ -1,3 +1,4 @@
+import 'package:currency_converter/core/extensions/num_formatting.dart';
 import 'package:currency_converter/presentation/features/exchange_rates/bloc/exchange_rates_bloc.dart';
 import 'package:currency_converter/presentation/features/exchange_rates/widgets/exchange_rates_chart.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
@@ -19,7 +20,7 @@ class ConversionResultContent extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              '1 ${args.fromCurrency} equals ${args.rate} ${args.toCurrency}',
+              '1 ${args.fromCurrency} equals ${args.rate.toMaxTwoDecimals()} ${args.toCurrency}',
               style: TextStyle(fontSize: 16, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
@@ -29,7 +30,7 @@ class ConversionResultContent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${args.result}',
+                  args.result.toMaxTwoDecimals(),
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
                 Text(
