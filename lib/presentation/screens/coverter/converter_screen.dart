@@ -1,6 +1,7 @@
 import 'package:currency_converter/core/extensions/num_formatting.dart';
 import 'package:currency_converter/di/di.dart';
 import 'package:currency_converter/presentation/common/status.dart';
+import 'package:currency_converter/presentation/screens/coverter/widgets/conversion_form.dart';
 import 'package:currency_converter/presentation/screens/currencies/bloc/currencies_bloc.dart';
 import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
 import 'package:currency_converter/presentation/widgets/app_snack_bar.dart';
@@ -40,10 +41,6 @@ class ConverterContent extends StatefulWidget {
 }
 
 class _ConverterContentState extends State<ConverterContent> {
-  final String _fromCurrency = 'USD';
-  String? _toCurrency;
-  final TextEditingController _amountController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,115 +48,21 @@ class _ConverterContentState extends State<ConverterContent> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          spacing: 16,
           children: [
-            BaseBlocConsumer<CurrenciesBloc, CurrenciesState>(
-              onSuccess: (context, state) {
-                return Column(
-                  children: [
-                    DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(labelText: 'From'),
-                      initialValue: _fromCurrency,
-                      items: state.currencies?.currencies
-                          .map(
-                            (c) => DropdownMenuItem(
-                              value: c.currencyCode,
-                              child: SizedBox(
-                                width: 300,
-                                child: Text('${c.currencyCode} - ${c.name}'),
-                              ),
-                            ),
-                          )
-                          .toList(),
+            ConversionForm(),
 
-                      onChanged: null,
-                    ),
-                    DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(labelText: 'To'),
-                      initialValue: _toCurrency,
-                      items: state.currencies?.currencies
-                          .map(
-                            (c) => DropdownMenuItem(
-                              value: c.currencyCode,
-                              child: SizedBox(
-                                width: 300,
-                                child: Text(
-                                  '${c.currencyCode} - ${c.name}',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (val) {
-                        setState(() => _toCurrency = val);
-                        _amountController.clear();
-                        context.read<ConverterBloc>().add(
-                          const ConversionReset(),
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
-
+            // if (_toCurrency != null)
+            //   BaseBlocConsumer<ExchangeRatesBloc, ExchangeRatesState>(
+            //     onSuccess: (context, state) {
+            //       return Text(
+            //         'Today’s rate: 1 ${state.baseCurrency} = ${state.todayRate(_toCurrency!)?.toMaxTwoDecimals()} $_toCurrency',
+            //       );
+            //     },
+            //   ),
             const SizedBox(height: 16),
 
-            // Amount input
-            TextFormField(
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Amount',
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Convert button
-            BlocBuilder<ExchangeRatesBloc, ExchangeRatesState>(
-              builder: (context, state) {
-                if (state.status == Status.success) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      if (_toCurrency != null &&
-                          _amountController.text.isNotEmpty) {
-                        final amount =
-                            num.tryParse(_amountController.text) ?? 0;
-                        context.read<ConverterBloc>().add(
-                          ConversionSubmitted(
-                            from: _fromCurrency,
-                            to: _toCurrency!,
-                            amount: amount,
-                            rate: state.todayRate(_toCurrency!) ?? 0,
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Convert'),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-
-            const SizedBox(height: 24),
-
-            if (_toCurrency != null)
-              BaseBlocConsumer<ExchangeRatesBloc, ExchangeRatesState>(
-                onSuccess: (context, state) {
-                  return Text(
-                    'Today’s rate: 1 ${state.baseCurrency} = ${state.todayRate(_toCurrency!)?.toMaxTwoDecimals()} $_toCurrency',
-                  );
-                },
-              ),
-
-            const SizedBox(height: 16),
-
-            // Show conversion result
+            /// Show conversion result
             BaseBlocConsumer<ConverterBloc, ConverterState>(
               listener: (context, state) {
                 if (state.status == Status.failure) {

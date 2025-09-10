@@ -1,5 +1,5 @@
 import 'package:currency_converter/data/models/currency_model.dart';
-import 'package:currency_converter/presentation/widgets/custom_cached_image.dart';
+import 'package:currency_converter/presentation/widgets/country_flag.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyItem extends StatelessWidget {
@@ -16,20 +16,7 @@ class CurrencyItem extends StatelessWidget {
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
-      leading: Container(
-        height: flagSize,
-        width: flagSize,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Theme.of(context).cardColor,
-        ),
-        child: CustomCachedImage(
-          imageUrl: currency.flag,
-          hidePlaceholderBackground: true,
-          width: flagSize,
-        ),
-      ),
+      leading: CountryFlag(flag: currency.flag, size: flagSize),
       title: Text(
         currency.name ?? '',
         style: TextStyle(fontWeight: FontWeight.bold),
