@@ -1,4 +1,8 @@
+import 'package:currency_converter/di/di.dart';
+import 'package:currency_converter/presentation/features/exchange_rates/bloc/exchange_rates_bloc.dart';
+import 'package:currency_converter/presentation/screens/conversion_result/widgets/conversion_result_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'conversion_result_args.dart';
 
@@ -9,35 +13,10 @@ class ConversionResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '1 ${args.fromCurrency} equals ${args.rate} ${args.toCurrency}',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${args.result}',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  ' ${args.toCurrency}',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+    return BlocProvider(
+      create: (context) =>
+          di<ExchangeRatesBloc>()..add(ExchangeRatesForLastWeekFetched()),
+      child: ConversionResultContent(args: args),
     );
   }
 }
