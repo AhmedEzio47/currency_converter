@@ -7,7 +7,7 @@ import 'package:currency_converter/domain/use_cases/get_last_week_exchange_rates
 import 'package:currency_converter/domain/use_cases/get_today_exchange_rate_use_case.dart';
 import 'package:currency_converter/domain/use_cases/parameters/exchange_rates_params.dart';
 import 'package:currency_converter/presentation/common/status.dart';
-import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
+import 'package:currency_converter/presentation/features/exchange_rates/bloc/exchange_rates_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

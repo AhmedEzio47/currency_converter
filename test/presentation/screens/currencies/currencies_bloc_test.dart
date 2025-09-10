@@ -5,7 +5,7 @@ import 'package:currency_converter/data/models/currency_model.dart';
 import 'package:currency_converter/domain/use_cases/get_currencies_use_case.dart';
 import 'package:currency_converter/domain/use_cases/use_case.dart';
 import 'package:currency_converter/presentation/common/status.dart';
-import 'package:currency_converter/presentation/screens/currencies/bloc/currencies_bloc.dart';
+import 'package:currency_converter/presentation/features/currencies/bloc/currencies_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

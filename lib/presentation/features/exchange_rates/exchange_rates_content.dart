@@ -1,5 +1,5 @@
-import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
-import 'package:currency_converter/presentation/screens/exchange_rates/widgets/exchange_rates_chart.dart';
+import 'package:currency_converter/presentation/features/exchange_rates/bloc/exchange_rates_bloc.dart';
+import 'package:currency_converter/presentation/features/exchange_rates/widgets/exchange_rates_chart.dart';
 import 'package:currency_converter/presentation/widgets/base_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 
