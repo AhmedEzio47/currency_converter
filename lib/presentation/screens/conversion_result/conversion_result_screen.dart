@@ -14,8 +14,8 @@ class ConversionResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          di<ExchangeRatesBloc>()..add(ExchangeRatesForLastWeekFetched()),
+      create: (context) => di<ExchangeRatesBloc>()
+        ..add(ExchangeRatesForLastWeekFetched(targetCurrency: args.toCurrency)),
       child: ConversionResultContent(args: args),
     );
   }
