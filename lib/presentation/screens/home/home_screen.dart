@@ -1,54 +1,28 @@
-import 'package:currency_converter/presentation/screens/coverter/converter_screen.dart';
-import 'package:currency_converter/presentation/screens/currencies/currencies_screen.dart';
-import 'package:currency_converter/presentation/screens/exchange_rates/exchange_rates_screen.dart';
+import 'package:currency_converter/di/di.dart';
+import 'package:currency_converter/presentation/screens/exchange_rates/bloc/exchange_rates_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../currencies/bloc/currencies_bloc.dart';
+import 'home_content.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: IntrinsicWidth(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 24,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const CurrenciesScreen()),
-                  );
-                },
-                child: const Text("Currencies"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ExchangeRatesScreen(),
-                    ),
-                  );
-                },
-                child: const Text("Exchange Rates"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const ConverterScreen()),
-                  );
-                },
-                child: const Text("Converter"),
-              ),
-            ],
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di<CurrenciesBloc>()..add(CurrenciesFetched()),
         ),
-      ),
+        BlocProvider(
+          create: (context) =>
+              di<ExchangeRatesBloc>()
+                ..add(ExchangeRatesForTodayFetched(baseCurrency: 'USD')),
+        ),
+      ],
+      child: HomeContent(),
     );
   }
 }

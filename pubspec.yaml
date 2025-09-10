@@ -26,6 +26,7 @@ dependencies:
   fl_chart: ^1.1.0
   mocktail: ^1.0.4
   flutter_hooks: ^0.21.3+1
+  flutter_animate: ^4.5.2
 
 dev_dependencies:
   flutter_test:
