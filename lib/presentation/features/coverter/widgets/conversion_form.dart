@@ -17,6 +17,7 @@ class ConversionForm extends HookWidget {
   const ConversionForm({super.key});
 
   final String _fromCurrency = 'USD';
+  final double animationDuration = 600;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class ConversionForm extends HookWidget {
                         ),
                       )
                       .animate()
-                      .fadeIn(duration: 700.ms)
+                      .fadeIn(duration: animationDuration.ms)
                       .slide(begin: const Offset(-1, 0)),
 
                   Row(
@@ -105,7 +106,7 @@ class ConversionForm extends HookWidget {
                         ],
                       )
                       .animate()
-                      .fadeIn(duration: 700.ms, delay: 500.ms)
+                      .fadeIn(duration: animationDuration.ms, delay: 300.ms)
                       .slide(begin: const Offset(1, 0)),
                 ],
               );
@@ -115,35 +116,33 @@ class ConversionForm extends HookWidget {
           /// Convert button
           BlocBuilder<ExchangeRatesBloc, ExchangeRatesState>(
             builder: (context, state) {
-              if (state.status == Status.success) {
-                return ElevatedButton(
-                  onPressed:
-                      toCurrency.value == null || amountController.text.isEmpty
-                      ? null
-                      : () {
-                          if (toCurrency.value != null &&
-                              amountController.text.isNotEmpty) {
-                            final amount =
-                                num.tryParse(amountController.text) ?? 0;
-                            context.read<ConverterBloc>().add(
-                              ConversionSubmitted(
-                                from: _fromCurrency,
-                                to: toCurrency.value!,
-                                amount: amount,
-                                rate: state.todayRate(toCurrency.value!) ?? 0,
-                              ),
-                            );
-                          }
-                        },
-                  child: const Text('Convert'),
-                ).animate().fadeIn().scale(
-                  duration: 500.ms,
-                  delay: 1.2.seconds,
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
+              return ElevatedButton(
+                onPressed:
+                    toCurrency.value == null ||
+                        amountController.text.isEmpty ||
+                        state.todayRate(toCurrency.value!) == null
+                    ? null
+                    : () {
+                        if (toCurrency.value != null &&
+                            amountController.text.isNotEmpty) {
+                          final amount =
+                              num.tryParse(amountController.text) ?? 0;
+                          context.read<ConverterBloc>().add(
+                            ConversionSubmitted(
+                              from: _fromCurrency,
+                              to: toCurrency.value!,
+                              amount: amount,
+                              rate: state.todayRate(toCurrency.value!) ?? 0,
+                            ),
+                          );
+                        }
+                      },
+                child: const Text('Convert'),
+              );
             },
+          ).animate().fadeIn().scale(
+            duration: animationDuration.ms,
+            delay: 600.ms,
           ),
         ],
       ),
