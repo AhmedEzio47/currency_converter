@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData get darkTheme {
     final Color primaryColor = Colors.deepPurpleAccent;
+    final Color scaffoldBackgroundColor = Color(0xFF0A0B14);
     final borderRadius = BorderRadius.circular(4);
 
     return ThemeData(
-      scaffoldBackgroundColor: Color(0xFF0A0B14),
+      scaffoldBackgroundColor: scaffoldBackgroundColor,
       brightness: Brightness.dark,
       primaryColor: primaryColor,
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: scaffoldBackgroundColor,
         titleTextStyle: TextStyle(
           fontSize: 20,
           color: Colors.white,
