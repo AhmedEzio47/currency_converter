@@ -17,8 +17,8 @@ class CurrenciesList extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: CurrencyItem(currency: currencies[index]).animate().slide(
           begin: Offset(1, 0),
-          duration: 300.ms,
-          delay: Duration(milliseconds: index * 100),
+          duration: 200.ms,
+          delay: Duration(milliseconds: (index < 8) ? (index * 100) : 500),
         ),
       ),
       itemCount: currencies.length,
