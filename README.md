@@ -17,7 +17,7 @@ To build and run the project, follow these steps:
    ```
 4. Run the app on an emulator or connected device using:
    ```
-   flutter run
+   flutter run --dart-define=APP_ID=your_api_key
    ```
 5. If you want to easily test the app on Android, you can download the
    APK [here](https://drive.google.com/file/d/1X1qswmtwy8LslG6rz18VStU3LyNn6KwR/view?usp=sharing):
@@ -41,4 +41,10 @@ lightweight and fast key-value database that works
 well with Flutter. `Hive` does not require a platform-specific database setup, making it easy to
 integrate and maintain across different platforms. And it can be integrated with `dio` easily
 by using `dio_cache_interceptor_hive_store`
+
+## UI
+
+The UI design is inspired by
+the [Dribbble design](https://dribbble.com/shots/16215911-Currency-Converter-Exchange-App)
+by [Simin Nikmanesh](https://dribbble.com/Siminn). So many thanks to her for the amazing design.
 
